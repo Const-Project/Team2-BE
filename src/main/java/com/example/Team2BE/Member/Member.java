@@ -13,4 +13,16 @@ public class Member {
 
     @Column
     private String memberId;
+
+    @Column
+    private String password;
+
+    @Column
+    private String name;
+
+    public Member(String memberId, String password, String name) {
+        this.memberId = memberId;
+        this.password = password;
+        this.name = name;
+    }
 }

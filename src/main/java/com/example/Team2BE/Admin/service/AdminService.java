@@ -52,5 +52,6 @@ public class AdminService {
 
     // 메뉴 추가
     public void createMenu(Object menu) {
+
     }
 }

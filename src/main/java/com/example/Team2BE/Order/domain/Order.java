@@ -26,7 +26,7 @@ public class Order {
     private Long isPacked;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     Member member;
 
     public Order(String menu, Long cost, Long quantity, Long isPacked, Member member) {

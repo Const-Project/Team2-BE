@@ -2,6 +2,7 @@ package com.example.Team2BE.Order.domain.repository;
 
 import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Order.domain.Order;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

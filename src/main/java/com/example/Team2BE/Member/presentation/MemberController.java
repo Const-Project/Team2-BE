@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    private MemberService memberService;
-
+    public MemberService memberService;
 
     // 회원가입
     @PostMapping("/create")
@@ -32,6 +31,7 @@ public class MemberController {
             MyPageResponse mypageResponse = memberService.getMyPage(request.getMemberId());
             return ResponseEntity.ok().body(mypageResponse);
         }
+        return ResponseEntity.ok().body(new MyPageResponse("로그인 실패", "로그인 실패"));
     }
 
     // 회원탈퇴
@@ -55,7 +55,7 @@ public class MemberController {
     @GetMapping("/{memberId}")
     public ResponseEntity<MyPageResponse> getMyPageRequest(@PathVariable(name="memberId") String memberId)
     {
-        MyPageResponse myPageResponse = memberService.getMypage(memberId);
+        MyPageResponse myPageResponse = memberService.getMyPage(memberId);
         return ResponseEntity.ok().body(myPageResponse);
     }
 

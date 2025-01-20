@@ -9,6 +9,6 @@ public interface MemberRepository {
     Member save(Member member);
     Optional<Member> findById(Long id);
     Optional<Member> findByMemberId(String memberId);
-    void deleteByMemberId(String memberId);
+    boolean deleteByMemberId(String memberId);
     List<Member> findAll();
 }

@@ -3,54 +3,62 @@ package com.example.Team2BE.Admin.service;
 import com.example.Team2BE.Admin.domain.Admin;
 import com.example.Team2BE.Admin.domain.repository.AdminRepository;
 import com.example.Team2BE.Member.domain.Member;
+import com.example.Team2BE.Member.domain.repository.MemberRepository;
+import com.example.Team2BE.Order.domain.Order;
+import com.example.Team2BE.Order.domain.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class AdminService {
 
-    @Autowired
     private AdminRepository adminRepository;
+    private MemberRepository memberRepository;
+    private OrderRepository orderRepository;
 
     // 전체 주문 내역
-    public List<Admin> getAllOrders() {
-        return adminRepository.findAll();
+    @Transactional
+    public List<Order> getAllOrders() {
+        List<Order> orders = new ArrayList<>();
+        List<Member> members = memberRepository.findAll();
+        for (Member member : members) {
+            List<Order> allByMember = orderRepository.findAllByMember(member);
+            orders.addAll(allByMember);
+        }
+        return orders;
     }
 
     // 매출 확인
+    @Transactional
     public Double getTotalSales() {
-        List<Admin> admins = adminRepository.findAll();
+        List<Order> orders = getAllOrders();
         Double totalSales = 0.0;
-        for (Admin admin : admins) {
-            totalSales += admin.getMenuPrice();
+        for (Order order : orders) {
+            totalSales += order.getCost();
         }
         return totalSales;
     }
 
     // 회원 강퇴
+    @Transactional
     public void deleteMember(Long memberId) {
-
+        Optional<Member> member = memberRepository.findById(memberId);
+        if (member.isPresent()) {
+            Member m = member.get();
+            memberRepository.deleteByMemberId(m.getMemberId());
+        }
     }
 
     // 회원 목록
+    @Transactional
     public List<Member> getAllMembers() {
-        List<Admin> admins = adminRepository.findAll();
-        List<Member> members = new ArrayList<>();
-        for (Admin admin : admins) {
-
-        }
+        List<Member> members = memberRepository.findAll();
         return members;
-    }
-
-    // 가격 변경
-    public void changeMenuPrice(Admin admin) {
-
-    }
-
-    // 메뉴 추가
-    public void createMenu(Object menu) {
     }
 }

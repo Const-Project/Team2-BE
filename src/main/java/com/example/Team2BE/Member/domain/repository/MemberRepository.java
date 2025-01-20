@@ -1,6 +1,7 @@
 package com.example.Team2BE.Member.domain.repository;
 
 import com.example.Team2BE.Member.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

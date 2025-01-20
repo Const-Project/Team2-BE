@@ -1,5 +1,7 @@
 package com.example.Team2BE.Admin.domain;
 
+import com.example.Team2BE.Member.domain.Member;
+import com.example.Team2BE.Order.domain.Order;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,9 +16,10 @@ public class Admin {
     private Long id;
 
     @Column
-    private String menuName;
+    private String name;
 
-    @Column
-    private Double menuPrice;
+    @JoinColumn
+    @ManyToOne
+    Order order;
 
 }

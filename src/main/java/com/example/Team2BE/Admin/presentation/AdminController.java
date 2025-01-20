@@ -3,6 +3,7 @@ package com.example.Team2BE.Admin.presentation;
 import com.example.Team2BE.Admin.domain.Admin;
 import com.example.Team2BE.Admin.service.AdminService;
 import com.example.Team2BE.Member.domain.Member;
+import com.example.Team2BE.Order.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/order/list")
-    public ResponseEntity<List<Admin>> getAllOrders() {
-        List<Admin> orders = adminService.getAllOrders();
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> orders = adminService.getAllOrders();
         return ResponseEntity.ok(orders);
     }
 
@@ -38,17 +39,5 @@ public class AdminController {
     public ResponseEntity<List<Member>> getAllMembers() {
         List<Member> members = adminService.getAllMembers();
         return ResponseEntity.ok(members);
-    }
-
-    @PostMapping("/menu/cost/change")
-    public ResponseEntity<Void> changeMenuPrice(@RequestBody Admin admin) {
-        adminService.changeMenuPrice(admin);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/menu/create")
-    public ResponseEntity<Void> createMenu(@RequestBody Object menu) {
-        adminService.createMenu(menu);
-        return ResponseEntity.ok().build();
     }
 }

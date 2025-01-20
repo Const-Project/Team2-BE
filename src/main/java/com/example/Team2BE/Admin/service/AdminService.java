@@ -61,4 +61,5 @@ public class AdminService {
         List<Member> members = memberRepository.findAll();
         return members;
     }
+
 }

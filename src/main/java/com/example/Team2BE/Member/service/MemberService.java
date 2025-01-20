@@ -33,28 +33,42 @@ public class MemberService {
             Member m = member.get();
             return password.equals(m.getPassword());
         }
+        return false;
     }
 
     // 회원탈퇴
     @Transactional
     public boolean deleteMember(String memberId, String password)
     {
-        boolean isDeleted = memoryMemberRepository.deleteByMemberId(memberId);
-        return isDeleted;
+        return memoryMemberRepository.deleteByMemberId(memberId);
     }
 
     // 비밀번호 변경
     @Transactional
     public void updatePassword(String memberId, String password, String newPassword)
     {
-
+        Optional<Member> member = memoryMemberRepository.findByMemberId(memberId);
+        if(member.isPresent())
+        {
+            Member m = member.get();
+            if(m.getPassword().equals(password))
+            {
+                m.setPassword(newPassword);
+            }
+        }
     }
 
     // 정보 보기
     @Transactional
     public MyPageResponse getMyPage(String memberId)
     {
-
+        Optional<Member> member = memoryMemberRepository.findByMemberId(memberId);
+        if(member.isPresent())
+        {
+            Member m = member.get();
+            return MyPageResponse.from(m);
+        }
+        return null;
     }
 
 }

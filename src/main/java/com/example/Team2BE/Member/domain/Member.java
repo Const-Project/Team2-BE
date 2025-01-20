@@ -24,9 +24,13 @@ public class Member {
     @Column
     private String name;
 
+    @Column
+    private String rank;
+
     public Member(String memberId, String password, String name) {
         this.memberId = memberId;
         this.password = password;
         this.name = name;
+        this.rank = "bronze";
     }
 }

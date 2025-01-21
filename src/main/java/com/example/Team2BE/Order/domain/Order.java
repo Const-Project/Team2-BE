@@ -10,10 +10,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name="orders")
 public class Order {
 
     @Id
-    private Long orderId;
+    private Long id;
 
     @Column
     private String menu;

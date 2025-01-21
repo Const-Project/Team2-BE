@@ -15,8 +15,8 @@ public class MemoryOrderRepository implements OrderRepository {
     @Override
     public Order save(Order order)
     {
-        order.setOrderId(++sequence);
-        store.put(order.getOrderId(), order);
+        order.setId(++sequence);
+        store.put(order.getId(), order);
         return order;
     }
 
@@ -39,7 +39,7 @@ public class MemoryOrderRepository implements OrderRepository {
         Optional<Order> order = findById(orderId);
         if (order.isPresent()) {
             Order o = order.get();
-            store.remove(o.getOrderId());
+            store.remove(o.getId());
             return true;
         } else return false;
     }

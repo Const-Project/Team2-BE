@@ -44,7 +44,7 @@ public class OrderService {
             {
                 if(menu.equals(order.getMenu()) && order.getQuantity().equals(quantity))
                 {
-                    memoryOrderRepository.deleteById(order.getOrderId());
+                    memoryOrderRepository.deleteById(order.getId());
                 }
             }
         }

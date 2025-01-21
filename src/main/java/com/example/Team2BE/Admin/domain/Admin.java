@@ -1,6 +1,5 @@
 package com.example.Team2BE.Admin.domain;
 
-import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Order.domain.Order;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,5 +20,4 @@ public class Admin {
     @JoinColumn
     @ManyToOne
     Order order;
-
 }

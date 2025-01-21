@@ -6,7 +6,6 @@ import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.domain.repository.MemberRepository;
 import com.example.Team2BE.Order.domain.Order;
 import com.example.Team2BE.Order.domain.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

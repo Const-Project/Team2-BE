@@ -5,6 +5,8 @@ import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Menu.domain.Menu;
 import com.example.Team2BE.Menu.domain.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,8 @@ import java.util.Optional;
 @Transactional
 public class MenuService {
 
-    public MenuRepository menuRepository;
+    @Autowired
+    private MenuRepository menuRepository;
 
     @Transactional
     public void updateMenuCost(String menuName, Long newCost)

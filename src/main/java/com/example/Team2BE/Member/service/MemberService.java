@@ -7,7 +7,9 @@ import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
 import com.example.Team2BE.Member.dto.request.MemberRequest;
 import com.example.Team2BE.Member.dto.response.MyPageResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +20,27 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
+
+    @Autowired
     private MemoryMemberRepository memoryMemberRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
-    public void createMember(String memberId, String password, String name){
-        Member member = new Member(memberId, password, name);
+    public void createMember(String memberId, String rawPassword, String name){
+        String encryptedPassword = passwordEncoder.encode(rawPassword);
+        Member member = new Member(memberId, encryptedPassword, name);
         memoryMemberRepository.save(member);
     }
 
     @Transactional
-    public Member loginMember(String memberId, String password)
+    public Member loginMember(String memberId, String rawPassword)
     {
         Optional<Member> member = memoryMemberRepository.findByMemberId(memberId);
         if(member.isPresent()) {
             Member m = member.get();
-            if (password.equals(m.getPassword()))
+            if (passwordEncoder.matches(rawPassword, m.getPassword()))
             {
                 return m;
             }

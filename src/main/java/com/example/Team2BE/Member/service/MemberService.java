@@ -1,5 +1,6 @@
 package com.example.Team2BE.Member.service;
 
+import ch.qos.logback.core.pattern.parser.OptionTokenizer;
 import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.domain.repository.MemberRepository;
 import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
@@ -26,14 +27,17 @@ public class MemberService {
     }
 
     @Transactional
-    public boolean loginMember(String memberId, String password)
+    public Member loginMember(String memberId, String password)
     {
         Optional<Member> member = memoryMemberRepository.findByMemberId(memberId);
         if(member.isPresent()) {
             Member m = member.get();
-            return password.equals(m.getPassword());
+            if (password.equals(m.getPassword()))
+            {
+                return m;
+            }
         }
-        return false;
+        return null;
     }
 
     // 회원탈퇴

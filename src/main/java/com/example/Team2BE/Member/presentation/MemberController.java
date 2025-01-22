@@ -1,12 +1,17 @@
 package com.example.Team2BE.Member.presentation;
 
 
+import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.dto.request.MemberRequest;
 import com.example.Team2BE.Member.dto.response.MyPageResponse;
 import com.example.Team2BE.Member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,15 +29,23 @@ public class MemberController {
 
     // 로그인
     @PostMapping
-    public ResponseEntity<MyPageResponse> loginMemberRequest(@RequestBody MemberRequest request)
+    public ResponseEntity<MyPageResponse> loginMemberRequest(@RequestBody MemberRequest request, HttpSession session, Model model)
     {
-        boolean isLogged = memberService.loginMember(request.getMemberId(), request.getPassword());
-        if(isLogged) {
+        Member member = memberService.loginMember(request.getMemberId(), request.getPassword());
+        if(member != null) {
+            session.setAttribute("member", member);
             MyPageResponse mypageResponse = memberService.getMyPage(request.getMemberId());
             return ResponseEntity.ok().body(mypageResponse);
         }
+        model.addAttribute("Error", "Invalid username or password");
         return ResponseEntity.ok().body(new MyPageResponse("로그인 실패", "로그인 실패"));
     }
+    // 로그아웃
+    @GetMapping("/logout")
+    public void logoutMemberRequest(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+    }
+
 
     // 회원탈퇴
     @DeleteMapping("/{memberId}/delete")

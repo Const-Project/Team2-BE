@@ -7,6 +7,7 @@ import com.example.Team2BE.Member.dto.response.MyPageResponse;
 import com.example.Team2BE.Member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    public MemberService memberService;
+
+    @Autowired
+    private MemberService memberService;
 
     // 회원가입
     @PostMapping("/create")

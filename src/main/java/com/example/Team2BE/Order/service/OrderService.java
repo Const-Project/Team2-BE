@@ -6,6 +6,7 @@ import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
 import com.example.Team2BE.Order.domain.Order;
 import com.example.Team2BE.Order.domain.repository.MemoryOrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,12 @@ import java.util.Optional;
 @Transactional
 public class OrderService {
 
-    public MemoryOrderRepository memoryOrderRepository;
-    public MemoryMemberRepository memoryMemberRepository;
+    @Autowired
+    private MemoryOrderRepository memoryOrderRepository;
+
+
+    @Autowired
+    private MemoryMemberRepository memoryMemberRepository;
 
     @Transactional
     public void createOrder(String menu, Long cost, Long quantity, Long isPacked, String memberId)

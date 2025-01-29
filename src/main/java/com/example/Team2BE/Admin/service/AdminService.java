@@ -4,8 +4,11 @@ import com.example.Team2BE.Admin.domain.Admin;
 import com.example.Team2BE.Admin.domain.repository.AdminRepository;
 import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.domain.repository.MemberRepository;
+import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
 import com.example.Team2BE.Order.domain.Order;
+import com.example.Team2BE.Order.domain.repository.MemoryOrderRepository;
 import com.example.Team2BE.Order.domain.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +20,14 @@ import java.util.Optional;
 @Transactional
 public class AdminService {
 
+    @Autowired
     private AdminRepository adminRepository;
-    private MemberRepository memberRepository;
-    private OrderRepository orderRepository;
+
+    @Autowired
+    private MemoryMemberRepository memberRepository;
+
+    @Autowired
+    private MemoryOrderRepository orderRepository;
 
     // 전체 주문 내역
     @Transactional

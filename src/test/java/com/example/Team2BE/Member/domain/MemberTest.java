@@ -1,7 +1,6 @@
 package com.example.Team2BE;
 
 import com.example.Team2BE.Member.domain.Member;
-import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
 import com.example.Team2BE.Member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,7 +14,7 @@ public class MyPageResponse {
     private List<String> orderList;
     private Long bill;
     public static MyPageResponse from(final Member member) {
-        return new MyPageResponse(member.getName(),member.getRank());
+        return new MyPageResponse(member.getName(),member.getMemberRank());
     }
 
     public MyPageResponse(String name, String rank) {

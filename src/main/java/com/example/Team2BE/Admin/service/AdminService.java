@@ -4,9 +4,7 @@ import com.example.Team2BE.Admin.domain.Admin;
 import com.example.Team2BE.Admin.domain.repository.AdminRepository;
 import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.domain.repository.MemberRepository;
-import com.example.Team2BE.Member.domain.repository.MemoryMemberRepository;
 import com.example.Team2BE.Order.domain.Order;
-import com.example.Team2BE.Order.domain.repository.MemoryOrderRepository;
 import com.example.Team2BE.Order.domain.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +22,9 @@ public class AdminService {
     private AdminRepository adminRepository;
 
     @Autowired
-    private MemoryMemberRepository memberRepository;
+    private OrderRepository orderRepository;
 
-    @Autowired
-    private MemoryOrderRepository orderRepository;
+    private MemberRepository memberRepository;
 
     // 전체 주문 내역
     @Transactional

@@ -1,9 +1,7 @@
 package com.example.Team2BE.Member.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +10,11 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
+@Table(name = "member")
 public class Member {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // 자동 생성 전략
     private Long id;
 
     @Column
@@ -27,12 +27,12 @@ public class Member {
     private String name;
 
     @Column
-    private String rank;
+    private String memberRank;
 
     public Member(String memberId, String password, String name) {
         this.memberId = memberId;
         this.password = password;
         this.name = name;
-        this.rank = "bronze";
+        this.memberRank = "bronze";
     }
 }

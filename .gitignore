@@ -37,3 +37,6 @@ out/
 .vscode
 
 leetk.pem
+
+# application.yaml을 Git에서 무시
+/src/main/resources/application.yaml

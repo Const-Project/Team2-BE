@@ -28,8 +28,8 @@ public class Order {
     @Column
     private Long isPacked;
 
-    @JoinColumn
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     Member member;
 
     public Order(String menu, Long cost, Long quantity, Long isPacked, Member member) {

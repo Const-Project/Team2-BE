@@ -1,15 +1,15 @@
 package com.example.Team2BE.Member.domain.repository;
 
 import com.example.Team2BE.Member.domain.Member;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository {
-    Member save(Member member);
-    Optional<Member> findById(Long id);
+public interface MemberRepository extends JpaRepository<Member, Long> {
+
+    boolean existsByMemberId(String memberId); // 아이디 존재 여부 확인
+
     Optional<Member> findByMemberId(String memberId);
-    boolean deleteByMemberId(String memberId);
-    List<Member> findAll();
+
+    void deleteByMemberId(String memberId);
 }

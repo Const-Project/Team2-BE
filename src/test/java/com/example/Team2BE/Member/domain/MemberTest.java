@@ -1,4 +1,4 @@
-package com.example.Team2BE;
+package com.example.Team2BE.Member.domain;
 
 import com.example.Team2BE.Member.domain.Member;
 import com.example.Team2BE.Member.service.MemberService;
